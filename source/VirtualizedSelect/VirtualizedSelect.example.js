@@ -9,8 +9,9 @@ export default class VirtualizedSelectExample extends Component {
   static propTypes = {
     cityData: PropTypes.array.isRequired,
     countryData: PropTypes.array.isRequired,
-    nameData: PropTypes.array.isRequired
-  };
+    nameData: PropTypes.array.isRequired,
+    animalData: PropTypes.array.isRequired
+  }
 
   constructor (props) {
     super(props)
@@ -29,16 +30,28 @@ export default class VirtualizedSelectExample extends Component {
       multi: false,
       searchable: true,
       selectedCreatable: null,
-      selectedCity: null
+      selectedCity: null,
+      selectedAnimal: null
     }
 
     this._loadGithubUsers = this._loadGithubUsers.bind(this)
   }
 
   render () {
-    const { cityData, countryData, nameData } = this.props
-    const { clearable, creatableOptions, disabled, githubUsers, multi, searchable, selectedCity, selectedCountry, selectedCreatable, selectedGithubUser, selectedName } = this.state
-
+    const { cityData, countryData, nameData, animalData } = this.props
+    const { clearable, creatableOptions, disabled, githubUsers, multi, searchable, selectedCity, selectedCountry, selectedCreatable, selectedGithubUser, selectedName, selectedAnimal } = this.state
+    const menuContainer = (menu) => {
+      const selectAll = () => this.setState({ selectedAnimal: animalData })
+      const clearAll = () => this.setState({ selectedAnimal: [] })
+      return (
+        <div>
+          <div className={styles.btnGroup}>
+            <button onClick={selectAll}>Select all</button><button onClick={clearAll}>Clear all</button>
+          </div>
+          {menu}
+        </div>
+      )
+    }
     return (
       <div>
         <h4 className={styles.header}>
@@ -195,6 +208,28 @@ export default class VirtualizedSelectExample extends Component {
           simpleValue
           value={selectedCreatable}
           valueKey='value'
+        />
+
+        <h4 className={styles.header}>
+          Decorated menu
+        </h4>
+
+        <div className={styles.description}>
+          Decorates menu with select and deselect all options
+        </div>
+
+        <VirtualizedSelect
+          labelKey='name'
+          multi
+          onChange={(selectedAnimal) => {
+            console.log(selectedAnimal)
+            this.setState({ selectedAnimal })
+          }}
+          options={animalData}
+          renderMenuContainer={menuContainer}
+          searchable
+          value={selectedAnimal}
+          valueKey='name'
         />
       </div>
     )

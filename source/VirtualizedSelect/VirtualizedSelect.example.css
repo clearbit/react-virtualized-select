@@ -72,3 +72,36 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.btnGroup {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.btnGroup button {
+  flex: 1 1 0;
+  height: 30px;
+
+  background: #e0e0e0e0;
+
+  appearance: none;
+  border-radius: 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+
+}
+
+.btnGroup button:hover {
+  background: #dcdcdc;
+}
+
+.btnGroup button:active {
+  background: #cdcdcdcd;
+}
+
+.btnGroup button:first-child {
+  border-left: none;
+}
