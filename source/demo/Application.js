@@ -7,6 +7,7 @@ import VirtualizedSelectExample from '../VirtualizedSelect/VirtualizedSelect.exa
 import cityData from './data/cities.js'
 import countryData from './data/countries.js'
 import nameData from './data/names.js'
+import animalData from './data/animals'
 import styles from './Application.css'
 import '../../styles.css'
 
@@ -34,6 +35,7 @@ class Application extends Component {
             cityData={cityData}
             countryData={countryData}
             nameData={nameData}
+            animalData={animalData}
           />
         </section>
       </div>

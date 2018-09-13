@@ -97,6 +97,7 @@ You can override the built-in option renderer by specifying your own `optionRend
 | labelKey | `string` | Attribute of option that contains the display text. |
 | option | `Object` | The option to be rendered. |
 | options | `Array<Object>` | Array of options (objects) contained in the select menu. |
+| renderMenuContainer | `Function(menu)` | Allows you to add additional content around menu. Receives menu as argument. Use `{menu}` render menu. |
 | selectValue | `Function` | Callback to update the selected values; for example, you may want to call this function on click. |
 | style | `Object` | Styles that must be passed to the rendered option. These styles are specifying the position of each option (required for correct option displaying in the dropdown).
 | valueArray | `Array<Object>` | Array of the currently-selected options. Use this property to determine if your rendered option should be highlighted or styled differently. |
