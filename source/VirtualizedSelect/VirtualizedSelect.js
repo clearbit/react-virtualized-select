@@ -63,11 +63,16 @@ export default class VirtualizedSelect extends Component {
 
   // See https://github.com/JedWatson/react-select/#effeciently-rendering-large-lists-with-windowing
   _renderMenu ({ focusedOption, focusOption, labelKey, onSelect, options, selectValue, valueArray, valueKey }) {
-    const { listProps, optionRenderer, renderMenuContainer } = this.props
+    const { listProps, optionRenderer, renderMenuContainer, focusOption:propsFocusOption } = this.props
     const focusedOptionIndex = options.indexOf(focusedOption)
     const height = this._calculateListHeight({ options })
     const innerRowRenderer = optionRenderer || this._optionRenderer
-
+    if (propsFocusOption) {
+      const customFocusOption = (option) => {
+        propsFocusOption(option);
+        focusOption(option);
+      }
+    }
     // react-select 1.0.0-rc2 passes duplicate `onSelect` and `selectValue` props to `menuRenderer`
     // The `Creatable` HOC only overrides `onSelect` which breaks an edge-case
     // In order to support creating items via clicking on the placeholder option,
@@ -80,7 +85,7 @@ export default class VirtualizedSelect extends Component {
       return innerRowRenderer({
         focusedOption,
         focusedOptionIndex,
-        focusOption,
+        focusOption: customFocusOption || focusOption,
         key,
         labelKey,
         onSelect,
